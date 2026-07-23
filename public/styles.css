@@ -4,11 +4,11 @@
   --text: #1d2430;
   --muted: #667085;
   --line: #d8dee8;
-  --accent: #266a66;
-  --accent-dark: #1d514e;
+  --accent: #087ea4;
+  --accent-dark: #075985;
   --danger: #b42318;
   --warning: #9a6700;
-  --soft: #e9f4f2;
+  --soft: #e8f6fb;
   font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
 }
 
@@ -182,9 +182,9 @@ main {
 
 .id-chip {
   padding: 5px 8px;
-  border: 1px solid #b8c8c5;
+  border: 1px solid #a7d8e8;
   border-radius: 6px;
-  background: #eef7f5;
+  background: #eef9fd;
   font-family: Consolas, "Courier New", monospace;
   font-size: 13px;
   overflow-wrap: anywhere;
@@ -301,9 +301,9 @@ button.danger {
   max-width: 780px;
   margin-top: 14px;
   padding: 14px;
-  border: 1px solid #b8c8c5;
+  border: 1px solid #a7d8e8;
   border-radius: 8px;
-  background: #eef7f5;
+  background: #eef9fd;
   line-height: 1.7;
 }
 
@@ -352,9 +352,9 @@ button.danger {
   display: grid;
   gap: 7px;
   padding: 14px;
-  border: 1px solid #b8c8c5;
+  border: 1px solid #a7d8e8;
   border-radius: 8px;
-  background: #eef7f5;
+  background: #eef9fd;
 }
 
 .credential-list span {
@@ -382,9 +382,9 @@ button.danger {
   z-index: 20;
   max-width: min(360px, calc(100vw - 36px));
   padding: 14px 16px;
-  border: 1px solid #b8c8c5;
+  border: 1px solid #a7d8e8;
   border-radius: 8px;
-  background: #143f3c;
+  background: #075985;
   color: #fff;
   box-shadow: 0 14px 34px rgb(29 36 48 / 18%);
   font-weight: 700;
