@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>研究室配属シミュレーター</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>研究室配属シミュレーター</h1>
+        <p>匿名IDで参加し、複数モデルの仮配属結果を研究室ごとに確認します。</p>
+      </div>
+      <div class="status" id="systemStatus">読み込み中</div>
+    </header>
+
+    <nav class="tabs" aria-label="主要画面">
+      <button class="tab active" data-tab="results">結果</button>
+      <button class="tab" data-tab="register">登録</button>
+      <button class="tab" data-tab="edit">編集・削除</button>
+      <button class="tab" data-tab="admin">管理</button>
+    </nav>
+
+    <main>
+      <section class="panel active" id="results">
+        <div class="section-title">
+          <h2>公開結果</h2>
+          <button id="refreshResults" class="secondary">更新</button>
+        </div>
+        <div id="summary" class="summary-grid"></div>
+        <div id="resultsGate" class="notice hidden"></div>
+        <div id="simulationResults" class="model-list"></div>
+      </section>
+
+      <section class="panel" id="register">
+        <div class="section-title">
+          <h2>新規登録</h2>
+        </div>
+        <form id="registerForm" class="form">
+          <label>
+            GPA
+            <input name="gpa" type="number" min="0" max="4.5" step="0.01" placeholder="3.42" required>
+          </label>
+          <div>
+            <div class="field-label">希望順位</div>
+            <div id="registerPrefs" class="pref-list"></div>
+          </div>
+          <button type="submit">匿名IDを発行して登録</button>
+        </form>
+        <div id="registrationResult" class="notice hidden"></div>
+      </section>
+
+      <section class="panel" id="edit">
+        <div class="section-title">
+          <h2>編集・削除</h2>
+        </div>
+        <form id="loginForm" class="form compact-form">
+          <label>
+            匿名ID
+            <input name="anonymousId" type="text" placeholder="ABCD-1234" required>
+          </label>
+          <label>
+            編集キー
+            <input name="editKey" type="password" required>
+          </label>
+          <button type="submit">自分の入力を開く</button>
+        </form>
+        <form id="editForm" class="form hidden">
+          <label>
+            GPA
+            <input name="gpa" type="number" min="0" max="4.5" step="0.01" required>
+          </label>
+          <div>
+            <div class="field-label">希望順位</div>
+            <div id="editPrefs" class="pref-list"></div>
+          </div>
+          <div class="button-row">
+            <button type="submit">更新</button>
+            <button type="button" id="deleteMine" class="danger">削除</button>
+          </div>
+        </form>
+        <div id="mineResult" class="notice hidden"></div>
+      </section>
+
+      <section class="panel" id="admin">
+        <div class="section-title">
+          <h2>管理</h2>
+        </div>
+        <form id="adminLoginForm" class="form compact-form">
+          <label>
+            管理者パスワード
+            <input name="password" type="password" required>
+          </label>
+          <button type="submit">管理画面を開く</button>
+        </form>
+        <div id="adminPanel" class="admin-panel hidden">
+          <div class="summary-grid" id="adminSummary"></div>
+          <form id="adminSettingsForm" class="form">
+            <label class="check-line">
+              <input name="accepting" type="checkbox">
+              受付中にする
+            </label>
+            <p class="form-help">受付中は結果を非公開にします。受付を停止すると、研究室ごとの仮配属結果が公開されます。</p>
+            <div>
+              <div class="field-label">研究室設定</div>
+              <div id="labsEditor" class="labs-editor"></div>
+              <button type="button" id="addLab" class="secondary">研究室を追加</button>
+            </div>
+            <button type="submit">設定を保存</button>
+          </form>
+          <form id="resetForm" class="form reset-box">
+            <p>全参加データを破棄します。研究室設定は残ります。復元はできません。</p>
+            <label>
+              確認
+              <input name="confirm" type="text" placeholder="RESET">
+            </label>
+            <button type="submit" class="danger">全参加データを破棄</button>
+          </form>
+        </div>
+        <div id="adminMessage" class="notice hidden"></div>
+      </section>
+    </main>
+
+    <div id="credentialModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="credentialModalTitle">
+      <div class="modal">
+        <h2 id="credentialModalTitle">登録を受け付けました</h2>
+        <p class="modal-lead">匿名IDと編集キーは再表示できません。編集・削除に必要なので、必ず保存してください。</p>
+        <div class="credential-list">
+          <div>
+            <span>匿名ID</span>
+            <strong id="modalAnonymousId"></strong>
+          </div>
+          <div>
+            <span>編集キー</span>
+            <strong id="modalEditKey"></strong>
+          </div>
+        </div>
+        <button type="button" id="closeCredentialModal">保存しました</button>
+      </div>
+    </div>
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
