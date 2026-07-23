@@ -1,0 +1,8 @@
+data/
+outputs/
+work/
+.agents/
+.codex/
+node_modules/
+.env
+*.log
